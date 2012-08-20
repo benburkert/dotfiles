@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+#
+# Setup my super awesome dotfiles yay! This will:
+#
+## git submodule init && git submodule update
+## symlink non-dot files and directories to their dotfile equivalent in $HOME
+## exit non zero if the dot file or directory exists and is not a symlink
+
+def git(command, *args)
+  arguments = args.map {|a| a.to_s }.join(' ')
+  %x{git #{command} #{arguments} 2>&1}
+end
+
+git :submodule, :init
+git :submodule, :update
+
+exit 0
