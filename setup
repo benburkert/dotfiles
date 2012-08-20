@@ -13,9 +13,8 @@ def git(command, *args)
   abort output unless $?.success?
 end
 
-dir       = File.expand_path(File.dirname(__FILE__))
-home      = ENV['HOME']
-localpath = dir.sub(home, '~')
+dir  = File.expand_path(File.dirname(__FILE__))
+home = ENV['HOME']
 
 Dir.chdir dir
 
@@ -25,11 +24,12 @@ git :submodule, :update
 Dir.glob(File.join(dir, '*')) do |path|
   name = File.basename(path)
 
-  next if name == 'README.md' #skip the README
-  next if name =~ /^\./       #skip dotfiles
+  #skip dotfiles, setup and README
+  next if %w[README.md setup].include?(name)
+  next if name =~ /^\./
 
   dotpath  = File.join(home, ".#{name}")
-  fullpath = File.join(localpath, name)
+  fullpath = File.join(dir, name)
 
   if File.symlink?(dotpath)
     linkpath = File.readlink(dotpath)
