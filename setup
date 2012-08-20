@@ -8,8 +8,12 @@
 
 def git(command, *args)
   arguments = args.map {|a| a.to_s }.join(' ')
-  %x{git #{command} #{arguments} 2>&1}
+  output = %x{git #{command} #{arguments} 2>&1}
+
+  abort output unless $?.success?
 end
+
+Dir.chdir File.dirname(__FILE__)
 
 git :submodule, :init
 git :submodule, :update
