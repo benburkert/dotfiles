@@ -1,2 +1,4 @@
+#! /bin/bash
+
 # Source the github-setup bits
 source /opt/github/env.sh
