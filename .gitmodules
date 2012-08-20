@@ -1,3 +1,6 @@
 [submodule ".bashrc_dispatch"]
 	path = .bashrc_dispatch
 	url = https://github.com/josephwecker/bashrc_dispatch.git
+[submodule ".vim-pathogen"]
+	path = .vim-pathogen
+	url = https://github.com/tpope/vim-pathogen.git
