@@ -13,9 +13,34 @@ def git(command, *args)
   abort output unless $?.success?
 end
 
-Dir.chdir File.dirname(__FILE__)
+dir       = File.dirname(__FILE__)
+home      = ENV['HOME']
+localpath = dir.sub(home, '~')
+
+Dir.chdir dir
 
 git :submodule, :init
 git :submodule, :update
+
+Dir.glob(File.join(dir, '*')) do |path|
+  name = File.basename(path)
+
+  next if name =~ /^\./  #skip dotfiles
+
+  dotpath  = File.join(home, ".#{name}")
+  fullpath = File.join(localpath, name)
+
+  if File.symlink?(dotpath)
+    linkpath = File.readlink(dotpath)
+
+    if linkpath != fullpath
+      abort "#{dotpath} is improperly symlinked to #{linkpath}"
+    end
+  elsif File.exists?(dotpath)
+    abort "#{dotpath} exists but is not a symlink to #{dotpath}"
+  else
+    File.symlink(fullpath, dotpath)
+  end
+end
 
 exit 0
