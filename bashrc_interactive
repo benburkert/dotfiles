@@ -6,3 +6,6 @@ source /opt/github/env.sh
 # Set the bash prompt ($PS1)
 source .script/prompt.sh
 set_prompt
+
+# Setup aliases
+source .script/aliases.sh
