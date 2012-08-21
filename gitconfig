@@ -1,0 +1,47 @@
+[hub]
+	protocol = https
+[core]
+	excludesfile = /opt/github/config/git/gitignore
+[user]
+	name = Ben Burkert
+	email = ben@benburkert.com
+	signingkey = 935B488B
+[credential]
+	helper = osxkeychain
+[color]
+    ui = auto
+  [color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+  [color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+  [color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+  [core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  editor = /usr/bin/vim
+  [alias]
+    ap = add -p
+    s = status
+    st = status
+    c = commit -S
+    br = branch
+    co = checkout
+    d = diff
+    df = diff
+    dc = diff --cached
+    l = log --oneline
+    lg = log -p
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    ls = ls-files
+    ign = ls-files -o -i --exclude-standard
+[include]
+  path = .github/.gitconfig
