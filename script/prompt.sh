@@ -7,7 +7,7 @@ function parse_git_branch {
 function rbenv_version {
   local version=$(rbenv local 2>/dev/null)
 
-  if [[ $? -eq 0 ]] ; then
+  if [[ $? -eq 0 && "$version" != "" ]] ; then
     echo -ne "($version)"
   fi
 }
@@ -20,7 +20,7 @@ function set_prompt {
   local  LIGHT_GRAY="\[\033[0;37m\]"
   local       CLEAR="\[\033[m\]"
 
-  PS1="$WHITE\w$BLUE\${rbenv_version}$GREEN\${parse_git_branch}${RED}  $CLEAR"
+  PS1="$WHITE\w$BLUE\$(rbenv_version)$GREEN\$(parse_git_branch)${RED}  $CLEAR"
   PS2='> '
   PS4='+ '
 }
