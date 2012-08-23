@@ -64,11 +64,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-
-" md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupWrapping()
+" Thorfile, Rakefile, Puppetfile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Puppetfile,config.ru}    set ft=ruby
 
 " load the plugin and indent settings for the detected filetype
 filetype plugin indent on
@@ -76,6 +73,10 @@ filetype plugin indent on
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
+
+" ctrlp.vim
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
