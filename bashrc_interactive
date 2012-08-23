@@ -9,3 +9,6 @@ set_prompt
 
 # Setup aliases
 source .script/aliases.sh
+
+# Source bash completion stuff (SLOOOOOOOWWWW)
+source `brew --prefix`/etc/bash_completion
