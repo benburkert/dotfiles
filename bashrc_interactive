@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# Source the github-setup bits
-source /opt/github/env.sh
+# Source the github-boxen bits
+source /opt/boxen/env.sh
 
 # Set the bash prompt ($PS1)
 source .script/prompt.sh
