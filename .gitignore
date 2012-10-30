@@ -1,1 +1,3 @@
 lein/self-installs
+emacs.d
+!emacs.d/init.el
