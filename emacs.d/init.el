@@ -9,7 +9,11 @@
   starter-kit-lisp
   starter-kit-ruby
   clojure-mode
+  clojure-test-mode
   markdown-mode
+  puppet-mode
+  nrepl
+  paredit
   color-theme-solarized))
 
 (dolist (pkg my-packages)
@@ -17,6 +21,15 @@
     (package-install pkg)))
 
 (load-theme 'solarized-dark t)
+
+(add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
+(add-to-list 'auto-mode-alist '("\\.pp\\'" . puppet-mode))
+
+(setq show-trailing-whitespace t)
+(setq require-final-newline t)
+
+(defun turn-on-paredit () (paredit-mode 1))
+(add-hook 'clojure-mode-hook 'turn-on-paredit)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
