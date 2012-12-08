@@ -14,6 +14,7 @@
   puppet-mode
   nrepl
   paredit
+  textmate
   color-theme-solarized))
 
 (dolist (pkg my-packages)
@@ -22,14 +23,22 @@
 
 (load-theme 'solarized-dark t)
 
+(textmate-mode)
+
 (add-to-list 'auto-mode-alist '("\\.clj\\'" . clojure-mode))
 (add-to-list 'auto-mode-alist '("\\.pp\\'" . puppet-mode))
 
 (setq show-trailing-whitespace t)
 (setq require-final-newline t)
 
-(defun turn-on-paredit () (paredit-mode 1))
-(add-hook 'clojure-mode-hook 'turn-on-paredit)
+(setq ruby-insert-encoding-magic-comment nil)
+
+;; Add .emacs.d to load-path
+(setq dotfiles-dir (file-name-directory
+                    (or (buffer-file-name) load-file-name)))
+(add-to-list 'load-path dotfiles-dir)
+
+(load "benburkert-lisp.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

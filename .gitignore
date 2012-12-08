@@ -1,3 +1,4 @@
 lein/self-installs
 emacs.d
+!emacs.d/benburkert-lisp.el
 !emacs.d/init.el
