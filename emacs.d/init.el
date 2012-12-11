@@ -15,7 +15,8 @@
   nrepl
   paredit
   textmate
-  color-theme-solarized))
+  color-theme-solarized
+  rainbow-delimiters))
 
 (dolist (pkg my-packages)
   (when (not (package-installed-p pkg))

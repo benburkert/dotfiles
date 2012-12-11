@@ -9,6 +9,8 @@
 (autoload 'paredit-mode "paredit.el" nil t)
 (add-lisp-hook (lambda ()
                  (paredit-mode 1)))
+(add-lisp-hook (lambda ()
+                 (rainbow-delimiters-mode 1)))
 
 ;; Make paredit play nice with eldoc
 (eval-after-load "eldoc"
@@ -57,6 +59,14 @@
 ;; nRepl
 (autoload 'nrepl-jack-in "clojure-mode" nil t)
 (eval-after-load "clojure-mode" '(require 'nrepl))
+;; (setq nrepl-lein-command "bin/lein")
+;; (setq nrepl-server-command "echo \"lein repl :headless\" | $SHELL -l")
+(setq nrepl-tab-command 'indent-for-tab-command)
+(setq nrepl-popup-stacktraces nil)
+
+(add-to-list 'same-window-buffer-names "*nrepl*")
+(add-hook 'nrepl-mode-hook 'subword-mode)
+(add-hook 'nrepl-mode-hook 'rainbow-delimiters-mode)
 
 ;; Run tests in nRepl
 (defun nrepl-run-tests (ns)
