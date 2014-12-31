@@ -1,4 +1,3 @@
---all
 --sort-files
 --color
 --follow
@@ -8,3 +7,8 @@
 --ignore-dir=coverage
 --ignore-dir=doc
 --ignore-dir=pkg
+--type-add=ruby=haml,rake,ru
+--type-add=js=coffee
+--type-add=css=less
+--type-set=puppet=.pp
+--type-set=vim=vim

@@ -1,11 +1,11 @@
-" disable vi mode
-set nocompatible
+set nocompatible          " disable vi mode
+syntax enable
+set encoding=utf8
+set showcmd               " display incomplete commands
+filetype plugin indent on " load file type plugins + indentation
 
 " load pathogen
 call pathogen#infect()
-
-" setup color schemes, light for macvim, dark for regular
-syntax enable
 
 if has('gui_running')
     set background=light
@@ -13,23 +13,39 @@ else
     set background=dark
 endif
 
-colorscheme solarized
+"" Airline
+set laststatus=2
 
-" Whitespace stuff
-set nowrap
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+"" Remaps
+let mapleader =","
+nnoremap <leader><leader> <c-^>
+
+"" Whitespace
+set nowrap                      " don't wrap lines
+set tabstop=2 shiftwidth=2      " a tab is two spaces
+set expandtab                   " use spaces, not tabs
+set backspace=indent,eol,start  " backspace through everything in insert mode
 
 " Trailing Whitespace
 highlight ExtraWhitespace ctermbg=red
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
+"" Searching
+set hlsearch    " highlight matches
+set incsearch   " incremental searching
+set ignorecase  " searches are case insensitive...
+set smartcase   " ... unless they contain at least one capitol letter
+
 "display tabs and trailing spaces
 set list
-set listchars=tab:▷⋅,nbsp:⋅
+set listchars=tab:\ \ ,nbsp:⋅
+
+" Thorfile, Rakefile, Puppetfile, Vagrantfile and Gemfile are Ruby
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Puppetfile,config.ru}    set ft=ruby
+
+" load the plugin and indent settings for the detected filetype
+filetype plugin indent on
 
 " file type detection stuff
 if has("autocmd")
@@ -42,10 +58,28 @@ if has("autocmd")
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-endif
 
-" Ignored Files
-let NERDTreeIgnore =  []
+  " C languages
+  autocmd FileType c,cpp,cxx,h,hpp,go setlocal ts=4 sts=4 sw=4 noexpandtab
+
+  " Go
+  " autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  autocmd FileType go map <leader>b :!go build %<CR>
+  autocmd FileType go map <leader>r :!go run %<CR>
+  autocmd FileType go map <leader>tt :!go test $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+  autocmd FileType go map <leader>tr :!go test -race -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+  autocmd FileType go map <leader>tv :!go test -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+
+  "autocmd FileType go map <leader>t :w<CR> :set makeprg=go\ test<CR> :make<CR>
+  autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+
+  autocmd FileType go nmap <Leader>s <Plug>(go-implements)
+  autocmd FileType go nmap <Leader>i <Plug>(go-info)
+  autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+  autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+  autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+  autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+endif
 
 " Line Numbers
 set number
@@ -55,37 +89,44 @@ set ruler
 set showmatch
 set virtualedit=all
 
-" Search
-set hlsearch
-set incsearch
-
 " Swap
 set nobackup
 set nowritebackup
 set noswapfile
 
-" Thorfile, Rakefile, Puppetfile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Puppetfile,config.ru}    set ft=ruby
-
-" load the plugin and indent settings for the detected filetype
-filetype plugin indent on
-
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
 let g:syntastic_quiet_warnings=1
 
-" ctrlp.vim
+" Ctrlp.vim
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
 
 " % to bounce from do to end etc.
 runtime! macros/matchit.vim
 
-" Show (partial) command in the status line
-set showcmd
+" Ignore everything in .gitignore
+let filename = '.gitignore'
+if filereadable(filename)
+  let igstring = ''
+  for oline in readfile(filename)
+    let line = substitute(oline, '\s|\n|\r', '', "g")
+    if line =~ '^#' | con | endif
+    if line == '' | con  | endif
+    if line =~ '^!' | con  | endif
+    if line =~ '/$' | let igstring .= "," . line . "*" | con | endif
+    let igstring .= "," . line
+  endfor
+  let execstring = "set wildignore=".substitute(igstring, '^,', '', "g")
+  execute execstring
+endif
 
-" VimClojure
-let vimclojure#WantNailgun = 1
-let g:vimclojure#HighlightBuiltins = 1
-let g:vimclojure#ParenRainbow = 1
-let g:vimclojure#DynamicHighlighting = 1
+" Go.vim
+let g:gofmt_command="goimports"
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+
+" vim-go
+let g:go_fmt_command = "goimports"
+
+" ctags
+nmap <F8> :TagbarToggle<CR>

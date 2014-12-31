@@ -1,5 +1,1 @@
 #! /bin/bash
-
-if [ ! -n "$BOXEN_HOME" ] ; then
-  source /opt/boxen/env.sh
-fi

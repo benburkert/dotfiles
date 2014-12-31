@@ -1,14 +1,11 @@
 #! /bin/bash
 
-# Source the github-boxen bits
-source /opt/boxen/env.sh
+for sh in .script/*.sh ; do
+  source $sh
+done
 
 # Set the bash prompt ($PS1)
-source .script/prompt.sh
-set_prompt
-
-# Setup aliases
-source .script/aliases.sh
+PROMPT_COMMAND=set_prompt
 
 # Source bash completion stuff (SLOOOOOOOWWWW)
 source `brew --prefix`/etc/bash_completion

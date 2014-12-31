@@ -1,13 +1,7 @@
-[hub]
-  protocol = https
-  [core]
-    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-  editor = /usr/bin/vim
-excludesfile = /opt/boxen/config/git/gitignore
 [user]
   name = Ben Burkert
   email = ben@benburkert.com
-  signingkey = 935B488B
+  signingkey = BC8EDD7F
 [color]
     ui = auto
   [color "branch"]
@@ -27,7 +21,6 @@ excludesfile = /opt/boxen/config/git/gitignore
   [core]
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
   editor = /usr/bin/vim
-excludesfile = /opt/boxen/config/git/gitignore
   [alias]
     ap = add -p
     s = status
@@ -46,6 +39,11 @@ excludesfile = /opt/boxen/config/git/gitignore
     ign = ls-files -o -i --exclude-standard
 [include]
   path = .github/.gitconfig
-
 [credential]
-helper = /opt/boxen/bin/boxen-git-credential
+	helper = osxkeychain
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[http]
+	cookiefile = /Users/benburkert/.gitcookies
