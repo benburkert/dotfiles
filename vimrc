@@ -122,11 +122,8 @@ if filereadable(filename)
 endif
 
 " Go.vim
-let g:gofmt_command="goimports"
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-
-" vim-go
 let g:go_fmt_command = "goimports"
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 
 " ctags
 nmap <F8> :TagbarToggle<CR>
