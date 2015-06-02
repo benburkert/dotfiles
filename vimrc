@@ -19,6 +19,7 @@ set laststatus=2
 "" Remaps
 let mapleader =","
 nnoremap <leader><leader> <c-^>
+let maplocalleader = "\\"
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -72,6 +73,7 @@ if has("autocmd")
 
   "autocmd FileType go map <leader>t :w<CR> :set makeprg=go\ test<CR> :make<CR>
   autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+  " autocmd BufWritePost *.go silent! !ctags -R -f $(git rev-parse --show-toplevel)/.git/tags . &
 
   autocmd FileType go nmap <Leader>s <Plug>(go-implements)
   autocmd FileType go nmap <Leader>i <Plug>(go-info)
@@ -79,6 +81,7 @@ if has("autocmd")
   autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
   autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+  autocmd FileType go nmap <Leader>e <Plug>(go-rename)
 endif
 
 " Line Numbers
