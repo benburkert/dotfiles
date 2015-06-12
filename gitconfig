@@ -1,7 +1,6 @@
 [user]
   name = Ben Burkert
   email = ben@benburkert.com
-  signingkey = BC8EDD7F
 [color]
     ui = auto
   [color "branch"]
@@ -25,7 +24,7 @@
     ap = add -p
     s = status
     st = status
-    c = commit -S
+    c = commit
     br = branch
     co = checkout
     d = diff

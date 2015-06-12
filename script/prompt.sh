@@ -34,7 +34,12 @@ function set_prompt {
     local exit_color=$RED
   fi
 
-  PS1="${YELLOW}╭──$WHITE\w$BLUE\$(rbenv_version)$PURPLE\$(parse_git_branch)${exit_color}\n${YELLOW}╰→ $CLEAR"
+  if [[ "$(uname)" == "Darwin" ]] ; then
+    PS1="${YELLOW}╭──$WHITE\w$BLUE\$(rbenv_version)$PURPLE\$(parse_git_branch)${exit_color}\n${YELLOW}╰→ $CLEAR"
+  else
+    PS1="${LIGHT_GRAY}╭──$WHITE\w$BLUE\$(rbenv_version)$PURPLE\$(parse_git_branch)${exit_color}★\n${LIGHT_GRAY}╰→ $CLEAR"
+  fi
+
   PS2='> '
   PS4='+ '
 }

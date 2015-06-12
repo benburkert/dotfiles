@@ -7,5 +7,7 @@ done
 # Set the bash prompt ($PS1)
 PROMPT_COMMAND=set_prompt
 
-# Source bash completion stuff (SLOOOOOOOWWWW)
-source `brew --prefix`/etc/bash_completion
+if [[ "$(uname)" == "Darwin" ]] ; then
+  # Source bash completion stuff (SLOOOOOOOWWWW)
+  source `brew --prefix`/etc/bash_completion
+fi
