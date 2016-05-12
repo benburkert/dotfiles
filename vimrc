@@ -67,9 +67,9 @@ if has("autocmd")
   " autocmd FileType go autocmd BufWritePre <buffer> Fmt
   autocmd FileType go map <leader>b :!go build %<CR>
   autocmd FileType go map <leader>r :!go run %<CR>
-  autocmd FileType go map <leader>tt :!go test $(go list -f {{.ImportPath}})/$(dirname %)<CR>
-  autocmd FileType go map <leader>tr :!go test -race -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
-  autocmd FileType go map <leader>tv :!go test -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+  autocmd FileType go map <leader>tt :!echo -ne '\033]50;ClearScrollback\a' && go test $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+  autocmd FileType go map <leader>tr :!echo -ne '\033]50;ClearScrollback\a' && go test -race -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+  autocmd FileType go map <leader>tv :!echo -ne '\033]50;ClearScrollback\a' && go test -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
 
   "autocmd FileType go map <leader>t :w<CR> :set makeprg=go\ test<CR> :make<CR>
   autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
