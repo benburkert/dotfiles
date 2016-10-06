@@ -65,11 +65,11 @@ if has("autocmd")
 
   " Go
   " autocmd FileType go autocmd BufWritePre <buffer> Fmt
-  autocmd FileType go map <leader>b :!go build %<CR>
-  autocmd FileType go map <leader>r :!go run %<CR>
-  autocmd FileType go map <leader>tt :!echo -ne '\033]50;ClearScrollback\a' && go test $(go list -f {{.ImportPath}})/$(dirname %)<CR>
-  autocmd FileType go map <leader>tr :!echo -ne '\033]50;ClearScrollback\a' && go test -race -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
-  autocmd FileType go map <leader>tv :!echo -ne '\033]50;ClearScrollback\a' && go test -v $(go list -f {{.ImportPath}})/$(dirname %)<CR>
+  autocmd FileType go map <leader>b :!go build -i $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>r :!go run $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>tt :!echo -ne '\033]50;ClearScrollback\a' && go build -i $(gopwd)/$(dirname %) && go test $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>tr :!echo -ne '\033]50;ClearScrollback\a' && go build -i -race $(gopwd)/$(dirname %) && go test -race -v $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>tv :!echo -ne '\033]50;ClearScrollback\a' && go build -i $(gopwd)/$(dirname %) && go test -v $(gopwd)/$(dirname %)<CR>
 
   "autocmd FileType go map <leader>t :w<CR> :set makeprg=go\ test<CR> :make<CR>
   autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
@@ -130,3 +130,7 @@ set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 
 " ctags
 nmap <F8> :TagbarToggle<CR>
+
+" remap ctrl-space to escape in all modes
+map <C-@> <Esc>
+map! <C-@> <Esc>

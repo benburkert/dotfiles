@@ -1,7 +1,7 @@
 [user]
   name = Ben Burkert
   email = ben@benburkert.com
-  signingkey = BC8EDD7F
+  signingkey = F1045ED0
 [color]
     ui = auto
   [color "branch"]
@@ -47,3 +47,6 @@
 	tool = vimdiff
 [http]
 	cookiefile = /Users/benburkert/.gitcookies
+
+[hub]
+protocol = https

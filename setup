@@ -25,7 +25,7 @@ Dir.glob(File.join(dir, '*')) do |path|
   name = File.basename(path)
 
   #skip dotfiles, setup and README
-  next if %w[README.md setup].include?(name)
+  next if %w[README.md setup bin].include?(name)
   next if name =~ /^\./
 
   dotpath  = File.join(home, ".#{name}")
@@ -41,6 +41,29 @@ Dir.glob(File.join(dir, '*')) do |path|
     abort "#{dotpath} exists but is not a symlink to #{dotpath}"
   else
     File.symlink(fullpath, dotpath)
+  end
+end
+
+unless File.directory?(File.join(home, "bin"))
+  Dir.mkdir File.join(home, "bin")
+end
+
+Dir.glob(File.join(dir, 'bin/*')) do |path|
+  name = File.basename(path)
+
+  binpath  = File.join(home, "bin/#{name}")
+  fullpath = File.join(dir, "bin/#{name}")
+
+  if File.symlink?(binpath)
+    linkpath = File.readlink(binpath)
+
+    if linkpath != fullpath
+      abort "#{binpath} is improperly symlinked to #{linkpath}"
+    end
+  elsif File.exists?(binpath)
+    abort "#{binpath} exists but is not a symlink to #{binpath}"
+  else
+    File.symlink(fullpath, binpath)
   end
 end
 

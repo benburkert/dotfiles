@@ -1,0 +1,3 @@
+#!/bin/bash -e
+
+exec sed "s^$GOPATH/src/^^" <(pwd)
