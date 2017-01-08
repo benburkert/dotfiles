@@ -1,6 +1,6 @@
 #! /bin/bash
 
-for sh in .script/*.sh ; do
+for sh in ~/.script/*.sh ; do
   source $sh
 done
 

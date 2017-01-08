@@ -50,3 +50,5 @@
 
 [hub]
 protocol = https
+[commit]
+	gpgsign = true

@@ -130,7 +130,3 @@ set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 
 " ctags
 nmap <F8> :TagbarToggle<CR>
-
-" remap ctrl-space to escape in all modes
-map <C-@> <Esc>
-map! <C-@> <Esc>
