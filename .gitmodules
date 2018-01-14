@@ -40,3 +40,9 @@
 [submodule "vim/bundle/splice"]
 	path = vim/bundle/splice
 	url = https://github.com/sjl/splice.vim.git
+[submodule "vim/bundle/vim-tmux-navigator"]
+	path = vim/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "tmux/tmux-powerline"]
+	path = tmux/tmux-powerline
+	url = https://github.com/erikw/tmux-powerline

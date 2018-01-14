@@ -3,8 +3,8 @@
 # The FreeType rasterizer needs to know the device DPI for best results
 # (changes require restart)
 dpi:
-  x: 96.0
-  y: 96.0
+  x: 250.0
+  y: 250.0
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
@@ -16,7 +16,7 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Menlo # should be "Menlo" or something on macOS.
+    family: Go Mono # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Regular
 
@@ -37,7 +37,7 @@ font:
     style: Regular
 
   # Point size of the font
-  size: 12.0
+  size: 14.0
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
   offset:
@@ -213,6 +213,14 @@ key_bindings:
   - { key: Period,   mods: Command, action: Paste                        }
   - { key: O,        mods: Command, action: Copy                         }
 
+  # remap alt(option) keys
+  - { key: B,        mods: Alt, chars: "\x1bb"                         }
+  - { key: F,        mods: Alt, chars: "\x1bf"                         }
+  - { key: J,        mods: Alt, chars: "\x1bj"                         }
+  - { key: K,        mods: Alt, chars: "\x1bk"                         }
+  - { key: H,        mods: Alt, chars: "\x1bh"                         }
+  - { key: L,        mods: Alt, chars: "\x1bl"                         }
+
 # Mouse bindings
 #
 # Currently doesn't support modifiers. Both the `mouse` and `action` fields must
@@ -235,4 +243,5 @@ mouse_bindings:
 # Shell
 #
 # You can set this to a path to your favorite shell, e.g. /bin/fish
-shell: /Users/benburkert/bin/shell
+shell:
+  program: /Users/benburkert/bin/shell
