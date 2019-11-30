@@ -67,12 +67,12 @@ if has("autocmd")
   " autocmd FileType go autocmd BufWritePre <buffer> Fmt
   autocmd FileType go map <leader>b :!go build -i $(gopwd)/$(dirname %)<CR>
   autocmd FileType go map <leader>r :!go run $(gopwd)/$(dirname %)<CR>
-  autocmd FileType go map <leader>tt :!echo -ne '\033]50;ClearScrollback\a' && go build -i $(gopwd)/$(dirname %) && go test $(gopwd)/$(dirname %)<CR>
-  autocmd FileType go map <leader>tr :!echo -ne '\033]50;ClearScrollback\a' && go build -i -race $(gopwd)/$(dirname %) && go test -race -v $(gopwd)/$(dirname %)<CR>
-  autocmd FileType go map <leader>tv :!echo -ne '\033]50;ClearScrollback\a' && go build -i $(gopwd)/$(dirname %) && go test -v $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>tt :!echo -ne '\033]50;ClearScrollback\a' && go build -i $(gopwd)/$(dirname %) && go test -count 1 $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>tr :!echo -ne '\033]50;ClearScrollback\a' && go build -i -race $(gopwd)/$(dirname %) && go test -count 1 -race -v $(gopwd)/$(dirname %)<CR>
+  autocmd FileType go map <leader>tv :!echo -ne '\033]50;ClearScrollback\a' && go build -i $(gopwd)/$(dirname %) && go test -count 1 -v $(gopwd)/$(dirname %)<CR>
 
   "autocmd FileType go map <leader>t :w<CR> :set makeprg=go\ test<CR> :make<CR>
-  autocmd BufWritePost,FileWritePost *.go execute 'Lint' | cwindow
+  " autocmd BufWritePost,FileWritePost *.go execute 'GoLint' | cwindow
   " autocmd BufWritePost *.go silent! !ctags -R -f $(git rev-parse --show-toplevel)/.git/tags . &
 
   autocmd FileType go nmap <Leader>s <Plug>(go-implements)
@@ -82,6 +82,8 @@ if has("autocmd")
   autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
   autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
   autocmd FileType go nmap <Leader>e <Plug>(go-rename)
+
+  autocmd FileType go colorscheme preto
 endif
 
 " Line Numbers
@@ -96,10 +98,6 @@ set virtualedit=all
 set nobackup
 set nowritebackup
 set noswapfile
-
-" Enable syntastic syntax checking
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
 
 " Ctrlp.vim
 let g:ctrlp_clear_cache_on_exit = 0
@@ -126,7 +124,12 @@ endif
 
 " Go.vim
 let g:go_fmt_command = "goimports"
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 
 " ctags
 nmap <F8> :TagbarToggle<CR>
+
+" syntastic
+let g:syntastic_enable_signs=1
+"let g:syntastic_quiet_messages = {'level': 'warnings'}
+let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'goerrcheck']
+let g:syntastic_aggregate_errors = 1

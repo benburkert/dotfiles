@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/benburkert/src/cloud.google.com'
+let g:netrw_dirhist_2='/Users/benburkert/src/cloud.google.com/go'
+let g:netrw_dirhist_3='/Users/benburkert/src/cloud.google.com/go/dlp'
+let g:netrw_dirhist_4='/Users/benburkert/src/cloud.google.com/go/dlp/apiv2'
+let g:netrw_dirhist_5='/Users/benburkert/src/github.com/benburkert/anchor/ykpiv'
+let g:netrw_dirhist_6='/Users/benburkert/src/github.com/benburkert/anchor/piv/yubico'

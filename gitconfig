@@ -1,7 +1,7 @@
 [user]
   name = Ben Burkert
   email = ben@benburkert.com
-  signingkey = F1045ED0
+  # signingkey = F1045ED0
 [color]
     ui = auto
   [color "branch"]
@@ -51,4 +51,4 @@
 [hub]
 protocol = https
 [commit]
-	gpgsign = true
+  # gpgsign = true

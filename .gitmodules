@@ -46,3 +46,9 @@
 [submodule "tmux/tmux-powerline"]
 	path = tmux/tmux-powerline
 	url = https://github.com/erikw/tmux-powerline
+[submodule "vim/bundle/preto"]
+	path = vim/bundle/preto
+	url = https://github.com/ewilazarus/preto
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = https://github.com/vim-syntastic/syntastic
